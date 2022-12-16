@@ -1,0 +1,171 @@
+#FUSING: Fusing in GNSS configuration
+
+common options:
+  prc_date: [2021,14]
+  prc_site: 6465
+
+  start_sow:     [1,10.0]    # (0:yyyy-mm-dd HH:mm:ss, 1: sow)
+  end_sow:       [1,839100.0]    # (0:yyyy-mm-dd HH:mm:ss, 1: sow)
+
+  process_mode: IGLC
+  filter_type:  FKF
+
+inputs:
+  prc_dir: /mnt/hgfs/WORK/DataGrooming
+  rnx_files:
+  nav_files:
+
+  sp3_files:
+  clk_files:
+  erp_files:
+  dcb_files:
+  bsx_file:
+  blq_file:
+  ion_file:
+  atx_file:
+  snx_file:
+
+  egm_file:
+  jpl_file:
+
+  imu_file:
+  imup_file:
+  pos_file:
+  sol_file:
+  ref_file:
+  err_file:
+  solstat_file:
+  trace_file:
+
+imu options:
+  nav_coord:   llh          #(0:ecef,    1:llh)
+  att_def:     enu_rfu      #(0:ned_frd, 2:enu_rfu)
+  gnsspv_fmt:  GINS
+  ins_align:   manual       #(0:manual,1:moving,2:gpssol)
+  simgps_loss: [110000.0, 0, 25, 60] #([ts, n, [duration],[spacing]])
+  est_sg: off
+  est_sa: off
+  dop_aid: off            # doppler measurement aiding
+  tdcp_aid: on           #
+  zupt_aid: off
+  nhc_aid: off
+
+gnss options:
+  mode: sol
+  sample_rate:  1.0        # GNSS measuremet sample interval
+  freq: l1+l2              # GNSS frequency options
+  el_mask: 15
+  snrmask_r: off
+  snrmask_b: off
+  snrmask_L1: 0,0,0,0,0,0,0,0,0
+  snrmask_L2: 0,0,0,0,0,0,0,0,0
+  snrmask_L5: 0,0,0,0,0,0,0,0,0
+  dynamics: off
+  tidecorr: off           #(0:off, 1:on, 2:otl)
+  ionoopt:  off           #(0:off, 1:brdc,2:sbas,3:if,4:est-stec,5:ionex-tex)
+  tropopt:  saas          #(0:off, 1:saas,2:sbas,3:est_ztd,4:est-ztdgrad)
+  sateph:   brdc          #(0:brdc,1:precise,2:brdc+sbas,3:brdc+ssrapc,4:brdc+ssrcom)
+  pre_ac:   wum           #(com,gfm,grm,wum,et.al)
+
+  posopt:
+    satpcv: off
+    recpcv: off
+    phw: off
+    eclipsing: off
+    raim: off
+    clkjump: off
+    sd_gnss: off
+
+  exclsats:
+
+  navsys: 1 #(1:gps+2:sbas+4:glo+8:gal+16:qzs+32:bds+64+navic)
+
+  aropts:
+    armode: continuous #(0:off,1:continuous,2:instantaneous,3:fix_and_hold)
+    gloarmode: off     #(0:off,1:on)
+    bdsarmode: off     #(0:off,1:on)
+    arfilter:  on
+    arthres:
+      arthres0: 2.0
+      arthres1: 0.1
+      arthres2: 0.0
+      arthres3: 1e-09
+      arthres4: 1e-05
+      arthresmin: 3.0
+      arthresmax: 3.0
+
+    varholdamb: 0.1
+    gainholdamb: 0.01
+    arlockcnt: 10
+    minfixsats: 4
+    minholdsats: 5
+    mindropsats: 10
+    arminfix: 20
+    armaxiter: 1
+    elmaskhold: 15
+    aroutcnt: 20
+
+  maxage: 30
+  syncsol: off
+  slipthres: 0.05
+  rejinno: [30,30.0]
+  rejdop: 30
+  niter: 1
+  baselen: 0
+  basesig: 0
+
+  weightmode: elevation #(0:elevation,1:snr)
+  eratio: [100,100,100]
+  errphase: 0.003
+  errphaseel: 0.003
+  errphasebl: 0
+  errdoppler: 1
+  snrmax: 52
+  stdbias: 10
+  stdiono: 0.03
+  stdtrop: 0.3
+  prnaccelh: 3
+  prnaccelv: 1
+  prnbias: 0.0
+  prniono: 0.001
+  prntrop: 0.0001
+  prnpos: 0
+  clkstab:
+
+  antenna:
+    posfmt1: llh
+    pos1: [40.1011558361,116.1315935917,58.804]
+    anttype1:
+    antdele1:
+    posfmt2: llh
+    pos2:
+    anttype2:
+    antdele2:
+
+  maxaveep:
+#  initrst: off
+
+camera options:
+
+
+outputs:
+  solformat: xyz #(0:llh,1:xyz,2:enu,3:nmea)
+  outhead: on
+  outopt: on
+  outvel: on
+  outins: on
+  timesys: gpst
+  timefmt: tow
+  timendec: 3
+  degfmt: deg
+  fieldsep:
+  outsingle: off
+  maxsolstd: 0
+  height: ellipsoidal
+  geoid: internal
+  solstatic: off #(0:all,1:single)
+  nmeaintv1: 0
+  nmeaintv2: 0
+  outstat: residual #(0:off,1:state,2:residual)
+  trace: 1
+
